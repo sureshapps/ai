@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GPT Social Media Post Generator</title>
+</head>
+<body>
+  <h2>Social Media Post Generator</h2>
+  <input id="topic" placeholder="Enter a topic..." />
+  <button onclick="generate()">Generate Post</button>
+  <p id="result" style="margin-top: 20px;"></p>
+
+  <script>
+    async function generate() {
+      const topic = document.getElementById("topic").value;
+      const response = await fetch("/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topic: topic })
+      });
+
+      const data = await response.json();
+      document.getElementById("result").innerText = data.post;
+    }
+  </script>
+</body>
+</html>
